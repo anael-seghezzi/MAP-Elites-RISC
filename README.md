@@ -20,13 +20,13 @@ Or import example/ex1_pong.c in your IDE.
 You can also run "build_unix.sh", "build_mingw.bat" or "build_vs.bat".
 
 
-Every 1000 generation the best program will be saved at "pong_best.cgen" and "pong_best.cgen.txt".<br>
-After 500000 generations (~10 min) the process will stop and save a preview of the best game in the form of tga frames "pong_frame0000.tga", "pong_frame0001.tga"...
+Every 1000 generation the best program is saved at "pong_best.cgen" and "pong_best.cgen.txt".<br>
+After the default 500000 generations (~10 min) the process stops and save a preview of the best game in the form of tga frames "pong_frame0000.tga", "pong_frame0001.tga"...<br>
 
 [![Ex1](https://github.com/anael-seghezzi/MAP-Elites-RISC/blob/master/example/ex1.gif)](https://github.com/anael-seghezzi/MAP-Elites-RISC/blob/master/example/ex1_pong.c)
 
 A larger number of generation can progressively optimize the number of instruction and call.
-Here is one short and fast solution found by MAP-Elites RISC :
+Here is one solution found by MAP-Elites RISC :
 
     5: load ($4, m[$5 + 0])
     29: less ($5, $7, $3)
