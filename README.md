@@ -25,7 +25,7 @@ After the default 500000 generations (~10 min) the process stops and save a prev
 
 [![Ex1](https://github.com/anael-seghezzi/MAP-Elites-RISC/blob/master/example/ex1.gif)](https://github.com/anael-seghezzi/MAP-Elites-RISC/blob/master/example/ex1_pong.c)
 
-A larger number of generation can progressively optimize the number of instruction and call.
+A larger number of generation can progressively optimize the number of instruction and call.<br>
 Here is one solution found by MAP-Elites RISC :
 
     5: load ($4, m[$5 + 0])
