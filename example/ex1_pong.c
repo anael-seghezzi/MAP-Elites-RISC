@@ -48,6 +48,7 @@
 #define MAX_CALL (DIM * 2)
 #define FRAME_COUNT 1024
 #define EXPORT_GAME_FRAMES
+#define EXPORT_MAP
 
 
 // MAP-Elites
@@ -166,7 +167,7 @@ void me_eval(int threadi, struct me_project *project, me_dna *src, struct me_inf
 		pong_update(&game);
 	}
 
-	info->fitness = game.score;
+	info->fitness = game.score / 20.0;
 	info->user1 = instr_count / (double)(MAX_CALL * FRAME_COUNT);
 	info->user2 = asmgen_line_count(&program) / (double)program.code_size;
 	asmgen_destroy(&program);
@@ -243,6 +244,16 @@ int main(int argc, char **argv)
 		}
 
 		asmgen_destroy(&program);
+	}
+	#endif
+
+	#ifdef EXPORT_MAP
+	{
+		struct m_image tmpi;
+		m_image_create(&tmpi, M_FLOAT, ME_SIZEX, ME_SIZEY, 1);
+		memcpy(tmpi.data, project.map, ME_POP_COUNT * sizeof(float));
+		img_save(&tmpi, "pong_map.tga");
+		m_image_destroy(&tmpi);
 	}
 	#endif
 
