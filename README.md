@@ -1,13 +1,15 @@
 MAP-Elites RISC
 ===============
 
-is a small C codebase for the evolution of RISC-like instruction programs using the Multi-dimensional Archive of Phenotypic Elites (MAP-Elites, https://arxiv.org/abs/1504.04909).
+is small C codebase with no dependencies to evolve RISC-like instruction programs using the Multi-dimensional Archive of Phenotypic Elites (MAP-Elites, https://arxiv.org/abs/1504.04909).
 
 Because MAP-Elites can explore any well-defined search space, it seems well suited for the evolution of instruction programs, as it can simultaneously evolve multiple solutions and optimize the number of instructions and calls.
 
 In the case of MAP-Elites RISC, the search space is defined as:<br>
 X = number of instruction used (size of the program)<br>
 Y = number of instruction called during execution (~speed of the program)
+
+The codebase includes a minimal MIPS-like instruction set and interpreter and a generic MAP-Elites implementation, all simple to read and understand.
 
 Ex1, learning to play Pong:
 ------------------------------------
