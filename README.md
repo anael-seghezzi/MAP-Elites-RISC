@@ -1,7 +1,7 @@
 MAP-Elites RISC
 ===============
 
-is small C codebase with no dependencies to evolve RISC-like instruction programs using the Multi-dimensional Archive of Phenotypic Elites (MAP-Elites, https://arxiv.org/abs/1504.04909).
+is a small C codebase with no dependencies to evolve RISC-like instruction programs using the Multi-dimensional Archive of Phenotypic Elites (MAP-Elites, https://arxiv.org/abs/1504.04909).
 
 Because MAP-Elites can explore any well-defined search space, it seems well suited for the evolution of instruction programs, as it can simultaneously evolve multiple solutions and optimize the number of instructions and calls.
 
