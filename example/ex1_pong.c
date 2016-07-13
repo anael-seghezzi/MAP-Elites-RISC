@@ -51,7 +51,6 @@
 
 
 // MAP-Elites
-#define ME_X
 #define ME_SIZEX DIM
 #define ME_SIZEY MAX_CALL
 
