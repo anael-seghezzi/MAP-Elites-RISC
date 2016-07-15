@@ -74,6 +74,7 @@ void pong_clear(struct pong *game)
 	game->score = 0;
 	game->bar_x = game->image.width / 2;
 	game->bar_r = 2;
+	game->bar_d = 0;
 }
 
 void pong_create(struct pong *game)
@@ -101,7 +102,7 @@ void pong_update(struct pong *game)
 	x2 = (int)game->bar_x + game->bar_r + 1;
 
 	// update bar position
-	game->bar_x += M_MIN(game->bar_d, 1);
+	game->bar_x += M_CLAMP(game->bar_d, -1, 1);
 	game->bar_x = M_CLAMP(game->bar_x, game->bar_r, w0 - game->bar_r);
 	game->bar_d = 0;
 
