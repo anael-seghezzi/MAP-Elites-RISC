@@ -131,18 +131,21 @@ void pong_update(struct pong *game)
 		M_NORMALIZE2(game->ball_dir, game->ball_dir);
 	}
 	
-	if (game->ball_pos.y > h0) {
+	if (game->ball_dir.y > 0) {
 
 		// bounce bar
-		if (game->ball_pos.x > x1 && game->ball_pos.x < x2) {
-			game->ball_pos.y = h0;
+		if (y >= (h0 - 1) && x > x1 && x < x2) {
+			game->ball_pos.y = h0 - 1;
 			game->ball_dir.y = -game->ball_dir.y;
-			game->ball_dir.y += (pong_randf() - 0.5) * rand_factor;
+			game->ball_dir.x += (pong_randf() - 0.5) * rand_factor;
 			M_NORMALIZE2(game->ball_dir, game->ball_dir);
 		}
 		// reset
-		else {
+		else if (y >= h0) {
 			pong_reset(game);
+			#ifdef PONG_SCORE_NEG
+				game->score--;
+			#endif
 		}
 	}
 }

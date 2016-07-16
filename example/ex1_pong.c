@@ -26,7 +26,6 @@
 ========================================================================*/
 
 // ex1: evolve a program playing pong
-// the best possible score after 1024 frames is 20
 
 
 #include <stdlib.h>
@@ -46,17 +45,19 @@
 // settings
 #define DIM 32
 #define MAX_CALL (DIM * 2)
-#define FRAME_COUNT 1024
+#define FRAME_COUNT 1024   
 #define EXPORT_GAME_FRAMES
 #define EXPORT_MAP
+#define SPEED 1
 
 
 // MAP-Elites
 #define ME_SIZEX DIM
 #define ME_SIZEY MAX_CALL
-
 #include "../src/mapelites_dna_float.c"
 #include "../src/asmgen.c"
+
+//#define PONG_SCORE_NEG // missing the ball decrements score
 #include "../game/pong.c"
 
 
@@ -147,6 +148,7 @@ void me_eval(int threadi, struct me_project *project, me_dna *src, struct me_inf
 {
 	struct asmgen program;
 	int64_t instr_count = 0;
+	int max_score = FRAME_COUNT / (game.image.height * 2);
 	int i;
 
 	to_asmgen(&program, src);
@@ -163,11 +165,15 @@ void me_eval(int threadi, struct me_project *project, me_dna *src, struct me_inf
 		instr_count += asmgen_run(&program, MAX_CALL);
 
 		// update game
-		game.bar_d = (float)M_CLAMP(program.mem[3], -1, 1);
+		game.bar_d = (float)M_CLAMP(program.mem[3], -1, 1) * SPEED;
 		pong_update(&game);
 	}
 
-	info->fitness = game.score / 20.0;
+#ifdef PONG_SCORE_NEG
+	info->fitness = (game.score + max_score) / (float)(max_score * 2);
+#else
+	info->fitness = game.score / (float)max_score;
+#endif
 	info->user1 = instr_count / (double)(MAX_CALL * FRAME_COUNT);
 	info->user2 = asmgen_line_count(&program) / (double)program.code_size;
 	asmgen_destroy(&program);
@@ -176,19 +182,17 @@ void me_eval(int threadi, struct me_project *project, me_dna *src, struct me_inf
 int get_best(float *data, int count)
 {
 	int best = 0, i;
-
 	for (i = 1; i < count; i++) {
 		if (data[i] > data[best])
 			best = i;
 	}
-	
 	return best;
 }
 
 
 int main(int argc, char **argv)
 {
-	printf("<mapelite pong>\n");
+	printf("<mapelite-risc pong>\n");
 
 	pong_create(&game);
 	me_create(&project, DIM * 6);
@@ -235,7 +239,7 @@ int main(int argc, char **argv)
 			asmgen_run(&program, MAX_CALL);
 
 			// update game
-			game.bar_d = (float)M_CLAMP(program.mem[3], -1, 1);
+			game.bar_d = (float)M_CLAMP(program.mem[3], -1, 1) * SPEED;
 			pong_update(&game);
 			pong_draw(&game);
 
