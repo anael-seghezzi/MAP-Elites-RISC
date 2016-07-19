@@ -168,7 +168,6 @@ int asmgen_run(struct asmgen *src, int max_call)
    int b;
    int cc = 0;
    int i = src->start;
-   int undef = 0;
 
    while (i >= 0 && i < src->code_size) {
 
