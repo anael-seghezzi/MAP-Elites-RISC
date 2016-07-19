@@ -37,6 +37,11 @@ Here is one solution found by MAP-Elites RISC :
     62: load ($6, m[$2 + 2])
 
 
+More about Map-Elites and Quality Diversity
+-------------------------------------------
+
+http://journal.frontiersin.org/article/10.3389/frobt.2016.00040/full
+
 See also:
 ---------
 
