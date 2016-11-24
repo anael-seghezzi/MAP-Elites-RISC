@@ -7,8 +7,7 @@ Because MAP-Elites can easily explore a 2 dimensional search space, it seems wel
 
 In the case of MAP-Elites RISC, the search space is defined as:<br>
 X = number of instruction used (size of the program)<br>
-Y = number of instruction called during execution (~speed of the program)<br>
-(Y is typically different than X when using branching)
+Y = number of instruction called during execution (~speed of the program)
 
 The codebase includes a minimal MIPS-like instruction set and interpreter and a generic MAP-Elites implementation, all simple to read and understand.
 
